@@ -29,7 +29,7 @@ const OnboardingRouteTwo = () => {
         </CardHeader>
         <CardContent>
           <Button asChild className="w-full">
-            <Link href="/">
+            <Link href="/api/auth">
               <CalendarCheck2 className="mr-2 size-4" />
               Connect Calendar to your Account
             </Link>
