@@ -39,6 +39,7 @@ async function getData(userId: string) {
 const DashboardLayout = async ({ children }: { children: ReactNode }) => {
   const session = await requireUser();
 
+  // eslint-disable-next-line no-unused-vars
   const data = await getData(session.user?.id as string);
 
   return (
