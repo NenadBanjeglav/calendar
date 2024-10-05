@@ -46,10 +46,21 @@ async function getData(eventUrl: string, userName: string) {
 
 const BookingFormPage = async ({
   params,
+  searchParams,
 }: {
   params: { username: string; eventUrl: string };
+  searchParams: { date?: string };
 }) => {
   const data = await getData(params.eventUrl, params.username);
+  const selectedDate = searchParams.date
+    ? new Date(searchParams.date)
+    : new Date();
+
+  const formatedDate = new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  }).format(selectedDate);
 
   return (
     <div className="flex min-h-screen w-screen items-center justify-center">
@@ -73,7 +84,7 @@ const BookingFormPage = async ({
               <p className="flex items-center">
                 <CalendarX2 className="mr-2 size-4 text-primary" />
                 <span className="text-sm font-medium text-muted-foreground">
-                  23.Sept.2024
+                  {formatedDate}
                 </span>
               </p>
               <p className="flex items-center">
