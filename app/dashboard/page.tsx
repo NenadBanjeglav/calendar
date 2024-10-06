@@ -5,14 +5,7 @@ import { requireUser } from "../lib/hook";
 import EmptyState from "../components/EmptyState";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import {
-  ExternalLink,
-  Link2,
-  Pen,
-  Settings,
-  Trash,
-  Users2,
-} from "lucide-react";
+import { ExternalLink, Pen, Settings, Trash, Users2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import {
   DropdownMenu,
@@ -23,6 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import CopyLinkMenuItem from "../components/CopyLinkMenu";
 
 async function getData(userId: string) {
   const data = await prisma.user.findUnique({
@@ -102,10 +96,9 @@ const DashboardPage = async () => {
                             Preview
                           </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Link2 className="mr-2 size-4" />
-                          Copy
-                        </DropdownMenuItem>
+                        <CopyLinkMenuItem
+                          meetingUrl={`${process.env.NEXT_PUBLIC_URL}/${data.userName}/${el.url}`}
+                        />
                         <DropdownMenuItem>
                           <Pen className="mr-2 size-4" /> Edit
                         </DropdownMenuItem>
