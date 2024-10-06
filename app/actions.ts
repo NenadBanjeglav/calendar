@@ -341,3 +341,17 @@ export async function UpdateEventTypeStatusAction(
     };
   }
 }
+
+export async function DeleteEventTypeAction(formData: FormData) {
+  const session = await requireUser();
+
+  // eslint-disable-next-line no-unused-vars
+  const data = await prisma.eventType.delete({
+    where: {
+      id: formData.get("id") as string,
+      userId: session.user?.id,
+    },
+  });
+
+  return redirect("/dashboard");
+}

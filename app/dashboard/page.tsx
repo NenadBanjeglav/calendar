@@ -106,9 +106,11 @@ const DashboardPage = async () => {
                         </DropdownMenuItem>
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem>
-                        <Trash className="mr-2 size-4" />
-                        Delete
+                      <DropdownMenuItem asChild>
+                        <Link href={`/dashboard/event/${el.id}/delete`}>
+                          <Trash className="mr-2 size-4" />
+                          Delete
+                        </Link>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
