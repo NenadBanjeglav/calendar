@@ -6,7 +6,6 @@ import EmptyState from "../components/EmptyState";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ExternalLink, Pen, Settings, Trash, Users2 } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import CopyLinkMenuItem from "../components/CopyLinkMenu";
+import EventTypeSwitch from "../components/EventTypeSwitch";
 
 async function getData(userId: string) {
   const data = await prisma.user.findUnique({
@@ -99,8 +99,10 @@ const DashboardPage = async () => {
                         <CopyLinkMenuItem
                           meetingUrl={`${process.env.NEXT_PUBLIC_URL}/${data.userName}/${el.url}`}
                         />
-                        <DropdownMenuItem>
-                          <Pen className="mr-2 size-4" /> Edit
+                        <DropdownMenuItem asChild>
+                          <Link href={`/dashboard/event/${el.id}`}>
+                            <Pen className="mr-2 size-4" /> Edit
+                          </Link>
                         </DropdownMenuItem>
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
@@ -125,8 +127,13 @@ const DashboardPage = async () => {
                   </div>
                 </Link>
                 <div className="flex items-center justify-between bg-muted px-5 py-3">
-                  <Switch />
-                  <Button>Edit Event</Button>
+                  <EventTypeSwitch
+                    initialChecked={el.active}
+                    eventTypeId={el.id}
+                  />
+                  <Button asChild>
+                    <Link href={`/dashboard/event/${el.id}`}>Edit Event</Link>
+                  </Button>
                 </div>
               </div>
             ))}
