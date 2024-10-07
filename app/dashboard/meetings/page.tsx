@@ -66,21 +66,25 @@ const MeetingsPage = async () => {
           <CardContent>
             {data.data.map((item) => (
               <form key={item.id} action={CancelMeetingAction}>
+                {/* @ts-ignore */}
                 <input type="hidden" name="eventId" value={item.id} />
                 <div className="grid grid-cols-3 items-center justify-between">
                   <div className="mb-5">
                     <p className="text-sm text-muted-foreground">
+                      {/* @ts-ignore */}
                       {format(fromUnixTime(item.when.startTime), "EEE, dd MMM")}
                     </p>
                     <p className="text-sm text-muted-foreground">
+                      {/* @ts-ignore */}
                       {format(fromUnixTime(item.when.startTime), "hh:mm a")}-
+                      {/* @ts-ignore */}
                       {format(fromUnixTime(item.when.endTime), "hh:mm a")}
                     </p>
                     <div className="mt-1 flex items-center">
                       <Video className="mr-2 size-4 text-primary" />
-
                       <a
                         className="text-xs text-primary underline underline-offset-4"
+                        // @ts-ignore
                         href={item.conferencing.details.url}
                         target="_blank"
                       >
